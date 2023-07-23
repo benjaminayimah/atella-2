@@ -1,22 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
+import ConfigureHome from '@/components/ConfigureHome.vue'
+import ConfigureAddress from '@/components/ConfigureAddress.vue'
+import ConfigurePayment from '@/components/ConfigurePayment.vue'
+import ConfigureAppointment from '@/components/ConfigureAppointment.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: HomeView,
+    children: [
+      { path: '/', name: 'ConfigureHome', component: ConfigureHome },
+      { path: '/address', name: 'ConfigureAddress', component: ConfigureAddress },
+      { path: '/payment', name: 'ConfigurePayment', component: ConfigurePayment },
+      { path: '/book-appointment', name: 'ConfigureAppointment', component: ConfigureAppointment }
+    ]
   }
 ]
 
