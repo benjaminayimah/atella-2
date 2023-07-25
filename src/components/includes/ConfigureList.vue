@@ -5,7 +5,7 @@
                 <path id="Path_264" data-name="Path 264" d="M3710.728,693.174a1.2,1.2,0,0,1-.838-.341l-6.174-6.019a1.2,1.2,0,0,1,1.675-1.718l5.248,5.116,9.383-11.194a1.2,1.2,0,0,1,1.839,1.542l-10.214,12.186a1.2,1.2,0,0,1-.859.428Z" transform="translate(-3703.354 -678.589)" fill="#ffffff"/>
             </svg>
         </span>
-        <div :data-type="!cover ? 'no-cover' : ''" class="bg-img br-16 mb-16" :style="{ backgroundImage: 'url('+item.image+')'}"></div>
+        <div :data-type="!cover ? 'no-cover' : ''" class="bg-img br-9 mb-16" :style="{ backgroundImage: 'url('+item.image+')'}"></div>
         <div>
             <h4 class="capitalize" :class="{'mb-8' : !item.sub_title && item.price }">{{ item.name }}</h4>
             <div v-if="item.sub_title" class="mb-8 fs-09">{{ item.sub_title }}</div>

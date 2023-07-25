@@ -67,5 +67,8 @@ export default {
     .centered {
         place-items: stretch
     }
+    .br-16 {
+        border-radius: 9px;
+    }
 }
 </style>

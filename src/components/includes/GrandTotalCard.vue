@@ -49,6 +49,9 @@ export default {
     .gap-24 {
         gap: 8px
     }
+    .br-16 {
+        border-radius: 9px
+    }
     .gray-card{
         padding: 16px;
         span {
