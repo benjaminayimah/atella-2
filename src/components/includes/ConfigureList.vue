@@ -7,7 +7,7 @@
         </span>
         <div :data-type="!cover ? 'no-cover' : ''" class="bg-img br-16 mb-16" :style="{ backgroundImage: 'url('+item.image+')'}"></div>
         <div>
-            <h4>{{ item.name }}</h4>
+            <h4 class="capitalize" :class="{'mb-8' : !item.sub_title && item.price }">{{ item.name }}</h4>
             <div v-if="item.sub_title" class="mb-8 fs-09">{{ item.sub_title }}</div>
             <span v-if="item.price" class="list-pill br-32">${{ computePrice(item.price) }}</span>
         </div>
@@ -53,10 +53,13 @@ export default {
     border: 1px solid #F0F0F0;
     transition: 100ms all;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    container-type: inline-size;
     &:hover {
         border-color: #000;
     }
 }
+
 .list-pill{
     padding: 6px 18px;
     background: #F6F6F6;
@@ -73,12 +76,31 @@ export default {
     background-size: cover;
 }
 .check-btn {
+    --this-height: 28px;
     background-color: var(--primary-color);
-    height: 28px;
-    width: 28px;
+    height: var(--this-height);
+    width: var(--this-height);
     inset: 8px 8px auto auto;
 }
 .selected{
     border-color: var(--primary-color);
+}
+@container(inline-size <= 230px) {
+    .bg-img {
+        margin-bottom: 8px;
+    }
+    h4 {
+        font-weight: 500;
+        line-height: 1.3;
+    }
+    .mb-8{
+        margin-bottom: 4px
+    }
+    .check-btn {
+        --this-height: 20px;
+        svg {
+            height: 8px
+        }
+    }
 }
 </style>

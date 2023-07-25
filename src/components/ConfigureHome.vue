@@ -37,9 +37,8 @@
                     <configure-list v-for="item in blinds" :key="item.id" :item="item" :cover="true" :name="'blind'" />
                 </div>
             </div>
-            <div class="grand-total br-16 mt-32 flx column gap-24 bg-white">
+            <div class="grand-total br-16 flx column gap-24 bg-white">
                 <total-card :button="true"/>
-                <div>Price breakdown</div>
                 <grand-total-card />
             </div>
         </div>

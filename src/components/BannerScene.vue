@@ -1,7 +1,24 @@
 <template>
-    <section id="banner" ref="banner" class="relative">
-      <div class="loading absolute" v-if="!modelLoaded">Loading...</div>
-        <a href="https://affinityws.com/atelleweb" class="a-button button-primary br-32 btn-lng scale-in absolute">Back</a>
+    <section id="banner" class="relative">
+      <transition name="zoom-rotate">
+        <div v-show="showModel" class="model" ref="model"></div>
+      </transition>
+      <transition name="fade">
+        <div v-if="showProgress" class="loading absolute">
+            <svg xmlns="http://www.w3.org/2000/svg" height="4" viewBox="0 0 204 4">
+              <g transform="translate(-831 -590.5)">
+                <line x2="200" transform="translate(833 592.5)" fill="none" stroke="rgba(0,0,0,0.2)" stroke-linecap="round" stroke-width="4"/>
+                <line :x2="progressFill" transform="translate(833 592.5)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="4"/>
+              </g>
+            </svg>
+        </div>
+      </transition> 
+        <a href="https://affinityws.com/atelleweb" class="a-button button-primary br-32 icon-btn icon-left scale-in gap-4 absolute">
+          <svg xmlns="http://www.w3.org/2000/svg" height="13.501" viewBox="0 0 15.243 13.501">
+            <path d="M15.216,11.51a.919.919,0,0,1,.007,1.294l-4.268,4.282H22.218a.914.914,0,0,1,0,1.828H10.955L15.23,23.2a.925.925,0,0,1-.007,1.294.91.91,0,0,1-1.287-.007L8.142,18.647h0a1.026,1.026,0,0,1-.19-.288.872.872,0,0,1-.07-.352.916.916,0,0,1,.26-.64l5.794-5.836A.9.9,0,0,1,15.216,11.51Z" transform="translate(-7.882 -11.252)"/>
+          </svg>
+          Back home
+        </a>
         <button @click="$store.commit('openCostModal')" class="button-secondary br-32 gap-8">
             Real cost of buying an Atella
             <span class="centered br-24">
@@ -29,6 +46,9 @@ export default {
       controls: null,
       modelLoaded: false,
       model: null,
+      progressFill: 1,
+      showProgress: true,
+      showModel: false
     };
   },
   watch: {
@@ -45,7 +65,7 @@ export default {
   },
   methods: {
     init3DScene() {
-      const container = this.$refs.banner;
+      const container = this.$refs.model;
       const containerWidth = container.offsetWidth;
       const containerHeight = container.offsetHeight;
 
@@ -101,7 +121,7 @@ export default {
       });
     },
     observeContainerResize() {
-      const container = this.$refs.banner;
+      const container = this.$refs.model;
       const observer = new ResizeObserver((entries) => {
         if (entries.length > 0) {
           const { width, height } = entries[0].contentRect;
@@ -121,8 +141,23 @@ export default {
       requestAnimationFrame(this.animate);
       this.renderer.render(this.scene, this.camera);
     },
+    startProgress() {
+      var interval = setInterval(() => {
+          if(!this.modelLoaded && this.progressFill < 180 ) {
+            this.progressFill++
+          }else if(this.modelLoaded) {
+            this.progressFill = 200
+            setTimeout(()=> {
+              clearInterval(interval);
+              this.showProgress = false
+              this.showModel = true
+            }, 200)
+          }
+        }, 20)
+    },
   },
   mounted() {
+    this.startProgress()
     this.init3DScene();
     this.loadModel();
     this.observeContainerResize();
@@ -143,16 +178,22 @@ export default {
     position: sticky;
     top: 0;
     z-index: 10;
-
+    transition: 0.3s height;
+    overflow: hidden;
+}
+.model{
+  height: inherit;
 }
 canvas {
     height: 100%;
     width: 100%;
 }
+
 .button-primary{
     inset: 50px auto auto 80px;
     background-color: #fff;
     color: #000;
+    padding: 14px 26px;
 }
 .button-secondary{
     padding: 14px 18px 14px 30px;
@@ -160,7 +201,7 @@ canvas {
     left: 50%;
     transform: translateX(-50%);
     bottom: 20px;
-    color: #000;
+    color: #fff;
     span{
       background-color: #fff;
       padding: 8px 24px;
@@ -168,9 +209,12 @@ canvas {
     
 }
 @media screen and (max-width: 900px){
+  #banner {
+    height: 30svh;
+  }
   .button-primary{
     inset: 30px auto auto 20px;
-    padding: 8px 24px;
+    padding: 8px 18px;
     height: 40px;
     font-size: 0.91rem;
 
@@ -182,5 +226,15 @@ canvas {
       padding: 8px 16px;
     }
   }
+}
+
+
+.zoom-rotate-enter-active,
+.zoom-rotate-leave-active {
+    transition: all 900ms;
+}
+.zoom-rotate-enter,
+.zoom-rotate-leave-to {
+  transform: scale(0) rotate(20deg);
 }
 </style>

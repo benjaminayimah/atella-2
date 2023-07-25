@@ -70,7 +70,10 @@ export default {
     width: 700px;
     z-index: 301;
     border: 1px solid #2B441D;
-    padding: 24px;
+    padding: 16px 24px 32px 24px;
+}
+ul {
+    flex-wrap: wrap;
 }
 li {
     a {
@@ -87,5 +90,10 @@ li {
 }
 .table-row{
     margin-top: 8px;
+}
+@media screen and (max-width: 900px){
+    .modal{
+        width: 90%;
+    }
 }
 </style>

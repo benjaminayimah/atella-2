@@ -77,9 +77,9 @@ section {
 
 }
 #config_section{
-    padding: 0 80px;
-    height: 50dvh;
-    top: 50dvh;
+  padding: 0 80px;
+  height: 50dvh;
+  top: 50dvh;
 }
 .title{
     width: 60%;
@@ -119,6 +119,9 @@ ul {
 @container(inline-size <= 500px) {
     .title{
         width: unset;
+    }
+    .fs-3rem {
+      font-size: 1.8rem
     }
 }
 
