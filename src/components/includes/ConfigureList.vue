@@ -91,7 +91,11 @@ export default {
     }
     h4 {
         font-weight: 500;
+        font-size: 14px;
         line-height: 1.3;
+    }
+    .fs-09{
+        font-size: 13px;
     }
     .mb-8{
         margin-bottom: 4px
@@ -101,6 +105,10 @@ export default {
         svg {
             height: 8px
         }
+    }
+    .list-pill{
+        font-size: 13px;
+        padding: 4px 10px
     }
 }
 </style>

@@ -102,5 +102,8 @@ export default {
     .gap-24 {
         gap: 8px
     }
+    .grand-total {
+        gap: 14px
+    }
 }
 </style>

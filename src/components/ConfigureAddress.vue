@@ -1,7 +1,7 @@
 <template>
     <div>
         <address-picker @go-back="goBack" @toggle="toggle" v-if="!summary" />
-        <div v-else class="flx column gap-40">
+        <div v-else class="flx column gap-40 wrapper">
             <div class="flx ai-c jc-sb br-16 bg-white card-with-border">
                 <div>
                     <div class="mb-4 fs-103rem">{{ configuration.type.name }}</div>
@@ -175,6 +175,14 @@ export default {
     }
     .dark {
         background-color: #342309;
+    }
+}
+.wrapper {
+    container-type: inline-size;
+}
+@container(inline-size <= 500px) {
+    .gap-24{
+        gap: 14px
     }
 }
 </style>
